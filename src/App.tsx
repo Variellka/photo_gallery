@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 import { GalleryPage, LoginPage } from "./pages";
+import './App.scss'
 
 function App() {
     return (

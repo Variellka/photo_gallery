@@ -1,7 +1,9 @@
+import { Authentification } from "../../features/Authentication";
+
 const LoginPage = () => {
     return (
         <div>
-            loginPage
+            <Authentification />
         </div>
     );
 };
