@@ -1,0 +1,12 @@
+.CommentItem {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 6px;
+    border-radius: 10px;
+    background-color: #f8c3d9;
+
+    .username {
+        font-weight: bold;
+        margin-right: 15px;
+    }
+}

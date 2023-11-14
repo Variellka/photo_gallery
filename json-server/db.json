@@ -46,7 +46,39 @@
             "image": "https://cdn.onemars.net/sites/whiskas_ru_71pCm_mwh5/image/skolko-dolzhen-vesit-kotenok_1620040319873.jpeg"
         }
     ],
-    "profile": [
+    "comments": [
+        {
+          "id": "1",
+          "text": "cute",
+          "photoId": "1",
+          "userId": "1"
+        },
+        {
+          "id": "2",
+          "text": "nice",
+          "photoId": "1",
+          "userId": "2"
+        },
+        {
+          "id": "3",
+          "text": "incredible",
+          "photoId": "2",
+          "userId": "1"
+        },
+        {
+          "id": "4",
+          "text": "fantastic",
+          "photoId": "2",
+          "userId": "2"
+        }, 
+        {
+          "id": "5",
+          "text": "unbelievable",
+          "photoId": "3",
+          "userId": "1"
+        }      
+    ],
+    "users": [
         {
           "id": "1",
           "username": "admin",

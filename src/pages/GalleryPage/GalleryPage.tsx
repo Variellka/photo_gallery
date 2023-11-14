@@ -1,9 +1,9 @@
-import { PhotoList } from "../../entity/Photo";
+import { PhotoGallery } from "../../widgets/PhotoGallery";
 
 const GalleryPage = () => {
     return (
         <div>
-            <PhotoList />
+            <PhotoGallery />
         </div>
     );
 };
