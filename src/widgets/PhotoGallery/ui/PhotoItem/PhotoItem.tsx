@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Photo } from '../../model/types/PhotoSchema';
 import './PhotoItem.scss'
-import CommentList from '../../../../entity/Comment/ui/CommentList/CommentList';
+import { CommentList } from '../../../../entity/Comment';
 
 interface PhotoItemProps {
     photo: Photo
@@ -22,7 +22,6 @@ const PhotoItem = (props: PhotoItemProps) => {
     return (
         <>
             <div className='PhotoItem' style={{backgroundImage: `url(${photo.image})`}} onClick={openModal}/>
-  
             {isModalOpen && (
                 <div className="modal">
                     <div className="modal-content">
