@@ -1,9 +1,13 @@
+import { Routes, Route } from "react-router";
+import { GalleryPage, LoginPage } from "./pages";
+
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <p>123</p>
-            </header>
+            <Routes>
+                <Route path="/login" element={<LoginPage />}/>
+                <Route path="/gallery" element={<GalleryPage/>}/>
+            </Routes>
         </div>
     );
 }
