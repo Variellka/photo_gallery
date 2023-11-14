@@ -1,9 +1,10 @@
 const fs = require('fs');
 const jsonServer = require('json-server');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 const server = jsonServer.create();
-
+const secretKey = 'mysecretkey';
 const router = jsonServer.router(path.resolve(__dirname, 'db.json'));
 
 server.use(jsonServer.defaults({}));
@@ -17,34 +18,33 @@ server.use(async (req, res, next) => {
 });
 
 server.post('/login', (req, res) => {
-    try {
-        const { username, password } = req.body;
-        const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
-        const { users = [] } = db;
+    const { username, password } = req.body;
+    
+    const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
+    const { users = [] } = db;
 
-        const userFromBd = users.find(
-            (user) => user.username === username && user.password === password,
-        );
+    const userFromBd = users.find(
+        (user) => user.username === username && user.password === password,
+    );  
 
-        if (userFromBd) {
-            return res.json(userFromBd);
-        }
-
-        return res.status(403).json({ message: 'User not found' });
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({ message: e.message });
+    if (userFromBd) {
+        const token = jwt.sign({ id: userFromBd.id, username: userFromBd.username }, secretKey, {
+            expiresIn: '1h', 
+        });
+  
+        res.json({ token });
+    } else {
+        res.status(401).json({ message: 'user not found' });
     }
 });
 
-// eslint-disable-next-line
-// server.use((req, res, next) => {
-//     if (!req.headers.authorization) {
-//         return res.status(403).json({ message: 'AUTH ERROR' });
-//     }
-
-//     next();
-// });
+server.get('/protected', (req, res) => {
+    const headers = req.headers.all()
+    if (headers.authorization !== `Bearer ${token}`) {
+        return res.status(403).json({ message: 'user not found' });
+    }
+    return res.json({ message: 'log in succsessfully' });
+}),
 
 server.use(router);
 

@@ -5,6 +5,14 @@
     align-items: center;
     height: 100vh;
 
+    .auth_text {
+        margin-bottom: 30px;
+        font-weight: bold;
+        background: #ccd3fc;
+        padding: 10px 20px;
+        border-radius: 12px;
+    }
+
     .auth_field {
         display: flex;
         justify-content: center;
@@ -23,12 +31,30 @@
     }
     
     .auth_button {
-        height: 30px;
+        height: 40px;
         width: 100px;
-        border-radius: 12px;
+        border-radius: 15px;
         border: none;
         color: white;
         background-color: rgb(85, 153, 232);
         cursor: pointer;
+    }
+
+    .error {
+        color: red;
+        margin-bottom: 15px;
+    }
+
+    .auth_success {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .auth_link {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        color: deeppink;
+        text-decoration: none;
     }
 }
