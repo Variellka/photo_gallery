@@ -1,0 +1,16 @@
+.Navbar {
+    display: flex;
+    justify-content: end;
+
+    button {
+        margin-right: 20px;
+        height: 40px;
+        width: 100px;
+        border-radius: 15px;
+        border: none;
+        color: white;
+        background-color: rgb(85, 153, 232);
+        cursor: pointer;
+        margin-top: 20px;
+    }
+}
