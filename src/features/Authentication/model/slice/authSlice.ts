@@ -6,7 +6,7 @@ import type { RootState } from '../../../../app/store'
 
 interface AuthState {
     auth_data: {
-        user?: User | null
+        user?: User
         token?: string | null
     }
     _inited: boolean
@@ -44,5 +44,5 @@ const authSlice = createSlice({
 export const { actions: authActions } = authSlice;
 export const { reducer: authReducer } = authSlice;
 
-export const selectCurrentUser = (state: RootState) => state.auth.auth_data?.user || null
+export const selectCurrentUser = (state: RootState) => state.auth.auth_data?.user
 export const selectAuthDataInited = (state: RootState) => state.auth._inited

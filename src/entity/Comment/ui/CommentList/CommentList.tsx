@@ -1,21 +1,22 @@
-import { commentsAPI } from "../../model/services/commentsAPI";
+import { editCommentsAPI } from "../../../../widgets/PhotoGallery";
 import { Comment } from "../../model/types/comment";
 import CommentItem from "../CommentItem/CommentItem";
 
 interface CommentListProps {
     photoId: string
+    authUserId: string
 }
 
 const CommentList = (props: CommentListProps) => {
-    const {photoId} = props;
-    const {data: comments, isLoading} =  commentsAPI.useFetchCommentsByIdQuery(photoId)
+    const { photoId, authUserId } = props
+    const {data: comments = [], isLoading} =  editCommentsAPI.useFetchCommentsByIdQuery(photoId)
 
     return (
         <div>
             {isLoading && <p>loading...</p>}
             {!isLoading && (
                 comments?.length ? comments.map(
-                    (comment: Comment) => (<CommentItem comment={comment} key={comment.id}/>)
+                    (comment: Comment) => (<CommentItem authUserId={authUserId} comment={comment} key={comment.id}/>)
                 ) : <p>no comments</p>
             )}
         </div>

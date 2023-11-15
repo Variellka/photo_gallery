@@ -2,19 +2,25 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    
-    .comment_input {
+    align-items: center;
+    margin-bottom: 20px;
 
+    .comment_input {
+        height: 35px;
+        width: 70%;
+        border-radius: 12px;
+        border: 3px solid rgb(85, 153, 232);;
+        outline: none;
+        padding: 10px;
     }
 
     .comment_button {
-        height: 40px;
-        width: 100px;
+        height: 35px;
+        width: 25%;
         border-radius: 15px;
         border: none;
         color: white;
         background-color: rgb(85, 153, 232);
         cursor: pointer;
-        margin-top: 20px;
     }   
 }

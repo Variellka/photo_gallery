@@ -1,8 +1,8 @@
 import { User } from '../../../User';
 
 export interface Comment {
-    id: string,
+    id?: string,
     text: string,
-    articleId: string,
+    photoId: string,
     user: User
 }
