@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import './AddCommentForm.scss'
+import Loader from '../../../../shared/ui/Loader/Loader';
 
 interface AddCommentFormProps {
     onSubmitComment: (text: string) => void
+    addCommentLoading: boolean
 }
 
 const AddCommentForm = (props: AddCommentFormProps) => {
-    const {onSubmitComment} = props
+    const {onSubmitComment, addCommentLoading} = props
     const [text, setText] = useState('')
 
     const onSendHandler = () => {
@@ -24,12 +26,16 @@ const AddCommentForm = (props: AddCommentFormProps) => {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             />
-            <button 
-                className="comment_button" 
-                onClick={onSendHandler}
-            >
-                add comment
-            </button>
+            {addCommentLoading 
+                ? <Loader /> 
+                :  
+                <button 
+                    className="comment_button" 
+                    onClick={onSendHandler}
+                >
+                    add comment
+                </button>}
+
         </div>
     );
 };

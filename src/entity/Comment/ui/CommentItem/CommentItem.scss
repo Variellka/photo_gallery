@@ -21,4 +21,14 @@
         font-weight: bold;
         cursor: pointer;
     }
+
+    .loader {
+        height: 20px;
+        width: 20px;
+
+        &::after {
+            width: 10px;
+            height: 10px;
+        }
+    }
 }

@@ -29,6 +29,13 @@ export const editCommentsAPI = createApi({
                 }
             }),
             invalidatesTags: ['Comments']
-        })
+        }),
+        deleteComment: build.mutation<string, string>({
+            query: (id) => ({
+                url: `/comments/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Comments']
+        }),
     })
 })

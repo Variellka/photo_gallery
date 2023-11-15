@@ -1,3 +1,4 @@
+import Loader from "../../../../shared/ui/Loader/Loader";
 import { photoAPI } from "../../model/services/photoAPI";
 import {Photo} from '../../model/types/PhotoSchema'
 import PhotoItem from "../PhotoItem/PhotoItem";
@@ -8,7 +9,7 @@ const PhotoGallery = () => {
 
     return (
         <div className="PhotoGallery">
-            {isLoading && <p>loading...</p>}
+            {isLoading && <Loader/>}
             {error && <p>something went wrong...</p>}
             {!isLoading && !error && photos && photos.map((photo: Photo) => (
                 <PhotoItem photo={photo} key={photo.id}/>

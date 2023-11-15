@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
-import { Photo } from '../../model/types/PhotoSchema';
-import './PhotoItem.scss'
+import { useSelector } from 'react-redux';
 import { CommentList } from '../../../../entity/Comment';
 import { AddCommentForm } from '../../../../features/AddCommentForm';
-import { editCommentsAPI } from '../../model/services/editCommentsAPI';
-import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../features/Authentication';
+import { editCommentsAPI } from '../../model/services/editCommentsAPI';
+import { Photo } from '../../model/types/PhotoSchema';
+import './PhotoItem.scss';
 
 interface PhotoItemProps {
     photo: Photo
@@ -13,7 +13,8 @@ interface PhotoItemProps {
 
 const PhotoItem = (props: PhotoItemProps) => {
     const {photo} = props;
-    const [addComment, {}] = editCommentsAPI.useAddCommentMutation()
+    const [addComment, {isLoading: addCommentLoading}] = editCommentsAPI.useAddCommentMutation()
+    const [deleteComment, {}] = editCommentsAPI.useDeleteCommentMutation()
     const authUser = useSelector(selectCurrentUser)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -35,6 +36,10 @@ const PhotoItem = (props: PhotoItemProps) => {
         }    
     }, [addComment, authUser, photo.id])
 
+    const onDeleteComment = useCallback((id: string) => {
+        deleteComment(id)
+    }, [deleteComment])
+
     return (
         <>
             <div className='PhotoItem' style={{backgroundImage: `url(${photo.image})`}} onClick={openModal}/>
@@ -47,8 +52,15 @@ const PhotoItem = (props: PhotoItemProps) => {
                         <div className='PhotoItem' style={{backgroundImage: `url(${photo.image})`}} />
                         <h1 className='title'>{photo.name}</h1>
                         <h2 className='comments'>comments:</h2>
-                        <AddCommentForm onSubmitComment={onSubmitComment}/>
-                        <CommentList photoId={photo.id} authUserId={authUser!.id}/>
+                        <AddCommentForm 
+                            onSubmitComment={onSubmitComment}
+                            addCommentLoading={addCommentLoading}
+                        />
+                        <CommentList 
+                            photoId={photo.id} 
+                            authUserId={authUser!.id}
+                            onDeleteComment={onDeleteComment}
+                        />
                     </div>
                 </div>
             )}
