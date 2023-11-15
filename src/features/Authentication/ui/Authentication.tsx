@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../shared/hooks/useAppDispatch/useAppDispatch';
@@ -8,10 +8,10 @@ import { authActions, selectCurrentUser } from '../model/slice/authSlice';
 import './Authentication.scss';
 
 const Authentication = () => {
-    const authUser = useSelector(selectCurrentUser)
+    const authUser = useSelector(selectCurrentUser) 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [login, {isLoading, error, data }] = authAPI.useLoginMutation()
+    const [login, {isLoading, error, data, isSuccess: isLoginSuccess}] = authAPI.useLoginMutation()
     const [validationError, setValidationError] = useState('')
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
@@ -29,13 +29,10 @@ const Authentication = () => {
         dispatch(authActions.deleteAuthData())
     }
 
-    useEffect(() => {
-        if (data?.token) {
-            dispatch(authActions.setCredentials({ user: data.user, token: data.token }))
-            navigate('/gallery')
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data?.token])
+    if (isLoginSuccess && data) {
+        dispatch(authActions.setCredentials({ user: data.user, token: data.token }))
+        navigate('/gallery')
+    }
 
     if (authUser) {
         return  (

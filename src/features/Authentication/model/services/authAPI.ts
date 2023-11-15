@@ -36,8 +36,10 @@ export const authAPI = createApi({
                 body: credentials,
             }),
         }),
-        protected: builder.mutation<{ message: string }, void>({
-            query: () => 'protected',
+        getUserInfo: builder.query<User, void>({
+            query: () => ({
+                url: 'user'
+            }),
         }),
     }),
 })

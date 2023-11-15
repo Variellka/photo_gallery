@@ -38,13 +38,25 @@ server.post('/login', (req, res) => {
     }
 });
 
-server.get('/protected', (req, res) => {
-    const headers = req.headers.all()
-    if (headers.authorization !== `Bearer ${token}`) {
-        return res.status(403).json({ message: 'user not found' });
-    }
-    return res.json({ message: 'log in succsessfully' });
-}),
+server.get('/user', authenticateToken, (req, res) => {
+    const user = req.user;
+    res.json({ id: user.id, username: user.username });
+});
+  
+function authenticateToken(req, res, next) {
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+  
+    if (!token) return res.sendStatus(401);
+  
+    jwt.verify(token, secretKey, (err, user) => {
+        console.log(token, user)
+        
+        if (err) return res.sendStatus(403);
+  
+        req.user = user;
+        next();
+    });
+}
 
 server.use(router);
 
