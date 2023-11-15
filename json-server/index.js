@@ -32,7 +32,7 @@ server.post('/login', (req, res) => {
             expiresIn: '1h', 
         });
   
-        res.json({ token });
+        res.json({user: { id: userFromBd.id, username: userFromBd.username }, token });
     } else {
         res.status(401).json({ message: 'user not found' });
     }

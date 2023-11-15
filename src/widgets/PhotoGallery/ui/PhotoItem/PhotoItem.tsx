@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Photo } from '../../model/types/PhotoSchema';
 import './PhotoItem.scss'
 import { CommentList } from '../../../../entity/Comment';
+import { AddCommentForm } from '../../../../features/AddCommentForm';
 
 interface PhotoItemProps {
     photo: Photo
@@ -31,6 +32,7 @@ const PhotoItem = (props: PhotoItemProps) => {
                         <div className='PhotoItem' style={{backgroundImage: `url(${photo.image})`}} />
                         <h1 className='title'>{photo.name}</h1>
                         <h2 className='comments'>comments:</h2>
+                        <AddCommentForm />
                         <CommentList photoId={photo.id}/>
                     </div>
                 </div>

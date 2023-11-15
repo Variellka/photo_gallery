@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface UserResponse {
-    id: string
+    user: User
     token: string
 }
 
@@ -21,7 +21,7 @@ export const authAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8000/',
         prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as RootState).auth.token
+            const token = (getState() as RootState).auth.auth_data.token
             if (token) {
                 headers.set('authorization', `Bearer ${token}`)
             }
